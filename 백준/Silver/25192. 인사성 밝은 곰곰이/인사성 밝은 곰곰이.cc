@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <map>
+#include <set>
 
 using namespace std;
 
@@ -13,7 +13,7 @@ int main()
 	int N, Count = 0;
 	cin >> N;
 
-	map<string, int> gomgom;
+	set<string> gomgom;
 	string str;
 	while (N--)
 	{
@@ -26,7 +26,7 @@ int main()
 			continue;
 		}
 
-		gomgom.try_emplace(str, 1);
+		gomgom.emplace(str);
 	}
 	Count += gomgom.size();
 	cout << Count << "\n";
