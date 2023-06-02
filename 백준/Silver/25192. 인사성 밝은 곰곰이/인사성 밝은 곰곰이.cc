@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <set>
+#include <unordered_set>
 
 using namespace std;
 
@@ -13,7 +13,7 @@ int main()
 	int N, Count = 0;
 	cin >> N;
 
-	set<string> gomgom;
+	unordered_set<string> gomgom;
 	string str;
 	while (N--)
 	{
@@ -22,11 +22,11 @@ int main()
 		if (str == "ENTER")
 		{
 			Count += gomgom.size();
-			gomgom.clear();
+			unordered_set<string>().swap(gomgom);
 			continue;
 		}
 
-		gomgom.emplace(str);
+		gomgom.insert(str);
 	}
 	Count += gomgom.size();
 	cout << Count << "\n";
