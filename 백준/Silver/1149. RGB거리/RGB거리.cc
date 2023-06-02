@@ -3,15 +3,13 @@
 
 using namespace std;
 
-int Costs[1000][3];
-
 int main()
 {
-	int N, Cost = 0;
+	int N, Total[3] = { 0, }, Subtotal[3] = { 0, };
 	cin >> N;
 
 	int R, G, B;
-	cin >> Costs[0][0] >> Costs[0][1] >> Costs[0][2];
+	cin >> Subtotal[0] >> Subtotal[1] >> Subtotal[2];
 
 	int costs[3] = { 0, };
 	for (int i = 1; i < N; i++)
@@ -21,10 +19,13 @@ int main()
 		for (int j = 0; j < 3; j++)
 		{
 			int idx1 = (j + 1) % 3, idx2 = (j + 2) % 3;
-			Costs[i][j] = costs[j] + (Costs[i - 1][idx1] < Costs[i - 1][idx2] ? Costs[i - 1][idx1] : Costs[i - 1][idx2]);
+			Total[j] = costs[j] + (Subtotal[idx1] < Subtotal[idx2] ? Subtotal[idx1] : Subtotal[idx2]);
 		}
+
+		for (int j = 0; j < 3; j++)
+			Subtotal[j] = Total[j];
 	}
 
-	cout << *min_element(&Costs[N - 1][0], &Costs[N - 1][2] + 1) << "\n";
+	cout << *min_element(&Total[0], &Total[2] + 1) << "\n";
 	return 0;
 }
