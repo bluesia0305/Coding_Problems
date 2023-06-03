@@ -4,28 +4,14 @@ using namespace std;
 
 int Paint(char board[][51], int m, int n)
 {
-	int count1 = 0, count2 = 0;
+	int count = 0;
 
 	for (int i = 0; i < 8; i++)
 		for (int j = 0; j < 8; j++)
-		{
-			if ((i + j) % 2)
-			{
-				if (board[m + i][n + j] == 'B')
-					count1++;
-				else
-					count2++;
-			}
-			else
-			{
-				if (board[m + i][n + j] == 'W')
-					count1++;
-				else
-					count2++;
-			}
-		}
+			if (board[m + i][n + j] == 'W' ^ ((i + j) & 1))
+				count++;
 
-	return count1 > count2 ? count2 : count1;
+	return count > 64 - count ? 64 - count : count;
 }
 
 int main()
@@ -39,21 +25,21 @@ int main()
 		for (int j = 0; j < N; j++)
 			cin >> ChessBoard[i][j];
 
-	int MinPaint = 64;
+	int result = 32;
 	for (int i = 0; i < M - 7; i++)
 		for (int j = 0; j < N - 7; j++)
 		{
 			int paint = Paint(ChessBoard, i, j);
-			if (paint < MinPaint)
-				MinPaint = paint;
+			if (paint < result)
+				result = paint;
 
-			if (!MinPaint)
+			if (!result)
 			{
 				cout << "0\n";
 				return 0;
 			}
 		}
-
-	cout << MinPaint << "\n";
+	
+	cout << result << "\n";
 	return 0;
 }
