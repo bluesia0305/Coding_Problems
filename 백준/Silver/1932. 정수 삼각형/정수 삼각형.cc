@@ -11,17 +11,26 @@ int main()
 	int N;
 	cin >> N;
 
-	int Nums[500][500];
-
+	int max = 0;
+	int Nums[500] = { 0, };
 	for (int i = 0; i < N; i++)
-		for (int j = 0; j < i + 1; j++)
-			cin >> Nums[i][j];
+	{
+		for (int j = i; j >= 0; j--)
+		{
+			int num;
+			cin >> num;
+			if (j == 0)
+				Nums[j] += num;
+			else if (j == i)
+				Nums[j] = Nums[j - 1] + num;
+			else
+				Nums[j] = num + (Nums[j - 1] > Nums[j] ? Nums[j - 1] : Nums[j]);
 
-	for (int i = N - 1; i > 0; i--)
-		for (int j = 0; j < i; j++)
-			Nums[i - 1][j] = Nums[i - 1][j] + (Nums[i][j] > Nums[i][j + 1] ? Nums[i][j] : Nums[i][j + 1]);
+			max = max < Nums[j] ? Nums[j] : max;
+		}
+	}
 
-	cout << Nums[0][0];
+	cout << max << "\n";
 
 	return 0;
 }
