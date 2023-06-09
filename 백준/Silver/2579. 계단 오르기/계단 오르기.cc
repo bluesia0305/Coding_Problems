@@ -2,8 +2,8 @@
 
 using namespace std;
 
-int Stairs[300];
-int Scores[300];
+int Stairs[301];
+int Scores[301];
 
 int main()
 {
@@ -14,7 +14,7 @@ int main()
 	int N;
 	cin >> N;
 
-	for (int i = 0; i < N; i++)
+	for (int i = 1; i <= N; i++)
 	{
 		cin >> Stairs[i];
 
@@ -23,24 +23,11 @@ int main()
 			int score = Stairs[i - 1] + Scores[i - 3];
 			Scores[i] = Stairs[i] + (Scores[i - 2] > score ? Scores[i - 2] : score);
 		}
-		else
-		{
-			switch (i)
-			{
-			case 0:
-				Scores[i] = Stairs[i];
-				break;
-
-			case 1:
-				Scores[i] = Stairs[i] + Stairs[i - 1];
-				break;
-
-			case 2:
-				Scores[i] = Stairs[i] + (Stairs[i - 1] > Stairs[i - 2] ? Stairs[i - 1] : Stairs[i - 2]);
-				break;
-			}
-		}
+		else if (i == 1)
+			Scores[i] = Stairs[i];
+		else if (i == 2)
+			Scores[i] = Stairs[i] + Stairs[i - 1];
 	}
-	cout << Scores[N - 1] << "\n";
+	cout << Scores[N] << "\n";
 	return 0;
 }
