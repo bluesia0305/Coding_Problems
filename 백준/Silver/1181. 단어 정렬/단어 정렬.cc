@@ -4,18 +4,6 @@
 
 using namespace std;
 
-class cmp
-{
-public:
-	bool operator()(string a, string b) const
-	{
-		if (a.length() == b.length())
-			return a < b;
-		
-		return a.length() < b.length();
-	}
-};
-
 string Strings[20000];
 
 int main()
