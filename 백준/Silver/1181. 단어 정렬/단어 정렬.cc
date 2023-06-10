@@ -21,20 +21,15 @@ int main()
 	sort(&Strings[0], &Strings[N - 1] + 1,
 		 [](string a, string b)
 		 {
-			if (a.length() == b.length())
-				return a < b;
-		 	return a.length() < b.length();
+			 if (a.length() == b.length())
+				 return a < b;
+			 return a.length() < b.length();
 		 });
 
 	string temp;
 	for (int i = 0; i < N; i++)
-	{
 		if (Strings[i] != temp)
-		{
-			temp = Strings[i];
-			cout << temp << "\n";
-		}
-	}
+			cout << (temp = Strings[i]) << "\n";
 
 	return 0;
 }
