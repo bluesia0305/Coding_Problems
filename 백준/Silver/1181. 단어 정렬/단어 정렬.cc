@@ -19,7 +19,7 @@ int main()
 		cin >> Strings[i];
 
 	sort(&Strings[0], &Strings[N - 1] + 1,
-		 [](string a, string b)
+		 [](const string& a, const string& b)
 		 {
 			 if (a.length() == b.length())
 				 return a < b;
