@@ -1,34 +1,29 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 
 using namespace std;
 
-int OpCounts[1000001];
-
-int GetCount(int n)
-{
-	if (n > 1)
-	{
-		vector<int> results;
-
-		if (!(n % 3))
-			results.push_back((OpCounts[n / 3] ? OpCounts[n / 3] : GetCount(n / 3)) + 1);
-
-		if (!(n % 2))
-			results.push_back((OpCounts[n / 2] ? OpCounts[n / 2] : GetCount(n / 2)) + 1);
-
-		results.push_back((OpCounts[n - 1] ? OpCounts[n - 1] : GetCount(n - 1)) + 1);
-		return OpCounts[n] = *min_element(results.begin(), results.end());
-	}
-
-	return 0;
-}
+char OpCounts[1000001];
 
 int main()
 {
 	int N;
 	cin >> N;
-	cout << GetCount(N) << "\n";
+
+	int i = 1;
+	while (i < N)
+	{
+		int temp = OpCounts[i] + 1;
+
+		if (3 * i <= N)
+			OpCounts[3 * i] = OpCounts[3 * i] ? OpCounts[3 * i] > temp ? temp : OpCounts[3 * i] : OpCounts[i] + 1;
+
+		if (2 * i <= N)
+			OpCounts[2 * i] = OpCounts[2 * i] ? OpCounts[2 * i] > temp ? temp : OpCounts[2 * i] : OpCounts[i] + 1;
+		
+		OpCounts[i + 1] = OpCounts[i + 1] ? OpCounts[i + 1] > temp ? temp : OpCounts[i + 1] : OpCounts[i] + 1;
+		i++;
+	}
+
+	cout << (int)OpCounts[N] << "\n";
 	return 0;
 }
