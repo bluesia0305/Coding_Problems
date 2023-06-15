@@ -1,29 +1,29 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
-char OpCounts[1000001];
+char Counts[1000001];
 
 int main()
 {
 	int N;
 	cin >> N;
 
-	int i = 1;
-	while (i < N)
+	int i = 0;
+	while (i++ < N)
 	{
-		int temp = OpCounts[i] + 1;
+		char cnt = Counts[i] + 1;
 
 		if (3 * i <= N)
-			OpCounts[3 * i] = OpCounts[3 * i] ? OpCounts[3 * i] > temp ? temp : OpCounts[3 * i] : OpCounts[i] + 1;
+			Counts[3 * i] = Counts[3 * i] ? min(Counts[3 * i], cnt) : cnt;
 
 		if (2 * i <= N)
-			OpCounts[2 * i] = OpCounts[2 * i] ? OpCounts[2 * i] > temp ? temp : OpCounts[2 * i] : OpCounts[i] + 1;
-		
-		OpCounts[i + 1] = OpCounts[i + 1] ? OpCounts[i + 1] > temp ? temp : OpCounts[i + 1] : OpCounts[i] + 1;
-		i++;
+			Counts[2 * i] = Counts[2 * i] ? min(Counts[2 * i], cnt) : cnt;
+
+		Counts[i + 1] = Counts[i + 1] ? min(Counts[i + 1], cnt) : cnt;
 	}
 
-	cout << (int)OpCounts[N] << "\n";
+	cout << (int)Counts[N] << "\n";
 	return 0;
 }
