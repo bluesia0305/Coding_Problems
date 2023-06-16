@@ -1,6 +1,4 @@
 #include <iostream>
-#include <vector>
-#include <cmath>
 
 using namespace std;
 
@@ -12,32 +10,35 @@ struct Coord
 
 int N;
 int Count;
-vector<Coord> Queens;
+int Placed[15][15];
 
-bool ValidPos(int x, int y)
+void SubordinatePaths(int x, int y, bool bEliminate)
 {
-	for (Coord coord : Queens)
-		if (coord.X == x || coord.Y == y ||	abs(x - coord.X) == abs(y - coord.Y))
-			return false;
-
-	return true;
+	int left = x, right = x;
+	int sign = bEliminate ? 1 : -1;
+	for (int i = y + 1; i < N; i++)
+	{
+		Placed[i][x] += sign;
+		if (--left >= 0) Placed[i][left] += sign;
+		if (++right < N) Placed[i][right] += sign;
+	}
 }
 
-void PlaceQueens(int startX, int startY)
+void PlaceQueen(int X, int placedQueens)
 {
-	Queens.push_back(Coord{ startX, startY });
-	const int numQueens = Queens.size();
+	SubordinatePaths(X, placedQueens, true);
 
-	if (numQueens < N)
+	if (placedQueens == N - 1)
 	{
-		for (int x = 0; x < N; x++)
-			if (ValidPos(x, numQueens))
-				PlaceQueens(x, numQueens);
-	}
-	else if (numQueens == N)
 		Count++;
+		return;
+	}
 
-	Queens.pop_back();
+	for (int x = 0; x < N; x++)
+		if (Placed[placedQueens + 1][x] == 0)
+			PlaceQueen(x, placedQueens + 1);
+	
+	SubordinatePaths(X, placedQueens, false);
 }
 
 int main()
@@ -45,7 +46,7 @@ int main()
 	cin >> N;
 
 	for (int x = 0; x < N; x++)
-		PlaceQueens(x, 0);
+		PlaceQueen(x, 0);
 
 	cout << Count << "\n";
 	return 0;
