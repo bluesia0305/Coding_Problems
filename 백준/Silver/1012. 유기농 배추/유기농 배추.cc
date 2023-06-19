@@ -2,12 +2,6 @@
 
 using namespace std;
 
-struct Coord
-{
-	int X;
-	int Y;
-};
-
 int T, M, N, K;
 
 void Expansion(int field[50][50], int x, int y)
