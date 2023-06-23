@@ -1,7 +1,40 @@
 #include <iostream>
-#include <unordered_map>
+#include <algorithm>
 
 using namespace std;
+
+int N;
+int Cards[500000];
+
+int SearchLeft(int num)
+{
+	int left = 0, right = N;
+	while (left < right)
+	{
+		int middle = (left + right) / 2;
+		if (num > Cards[middle])
+			left = middle + 1;
+		else
+			right = middle;
+	}
+
+	return right;
+}
+
+int SearchRight(int num)
+{
+	int left = 0, right = N;
+	while (left < right)
+	{
+		int middle = (left + right) / 2;
+		if (num < Cards[middle])
+			right = middle;
+		else
+			left = middle + 1;
+	}
+
+	return left;
+}
 
 int main()
 {
@@ -9,23 +42,20 @@ int main()
 	cin.tie(nullptr);
 	cout.tie(nullptr);
 
-	int N, M;
 	cin >> N;
-	unordered_map<int, int> Cards;
 
-	while (N--)
-	{
-		int card;
-		cin >> card;
-		Cards[card]++;
-	}
+	for (int i = 0; i < N; i++)
+		cin >> Cards[i];
 
+	sort(&Cards[0], &Cards[N - 1] + 1);
+
+	int M;
 	cin >> M;
 	while (M--)
 	{
 		int card;
 		cin >> card;
-		cout << Cards[card] << " ";
+		cout << SearchRight(card) - SearchLeft(card) << " ";
 	}
 	cout << "\n";
 
