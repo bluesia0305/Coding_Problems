@@ -1,12 +1,13 @@
 #include <iostream>
+#include <string>
 #include <algorithm>
 
 using namespace std;
 
 struct Member
 {
-	char Name[101];
-	unsigned char Age;
+	string Name;
+	int Age;
 	int Index;
 };
 
@@ -23,10 +24,8 @@ int main()
 
 	for (int i = 0; i < N; i++)
 	{
-		int age;
 		Members[i].Index = i;
-		cin >> age >> Members[i].Name;
-		Members[i].Age = (unsigned char)age;
+		cin >> Members[i].Age >> Members[i].Name;
 	}
 
 	sort(&Members[0], &Members[N - 1] + 1,
@@ -39,7 +38,7 @@ int main()
 		 });
 
 	for (int i = 0; i < N; i++)
-		cout << (int)Members[i].Age << " " << Members[i].Name << "\n";
+		cout << Members[i].Age << " " << Members[i].Name << "\n";
 
 	return 0;
 }
