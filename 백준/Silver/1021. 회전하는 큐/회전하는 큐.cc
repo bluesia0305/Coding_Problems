@@ -31,11 +31,11 @@ int main()
 			dq.push_back(temp);
 			cnt++;
 		}
-		dq.pop_front();
 
-		if (cnt > dq.size() + 1 - cnt)
-			cnt = dq.size() + 1 - cnt;
-		
+		if (cnt > dq.size() - cnt)
+			cnt = dq.size() - cnt;
+
+		dq.pop_front();
 		Count += cnt;
 	}
 
