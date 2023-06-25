@@ -3,7 +3,7 @@
 
 using namespace std;
 
-deque<int> dq;
+queue<int> q;
 
 int main()
 {
@@ -15,7 +15,7 @@ int main()
 	cin >> N >> M;
 
 	for (int i = 1; i <= N; i++)
-		dq.push_back(i);
+		q.push(i);
 
 	int Count = 0;
 	while (M--)
@@ -24,18 +24,18 @@ int main()
 		cin >> num;
 
 		int cnt = 0;
-		while (num != dq.front())
+		while (num != q.front())
 		{
-			int temp = dq.front();
-			dq.pop_front();
-			dq.push_back(temp);
+			int temp = q.front();
+			q.pop();
+			q.push(temp);
 			cnt++;
 		}
 
-		if (cnt > dq.size() - cnt)
-			cnt = dq.size() - cnt;
+		if (cnt > q.size() - cnt)
+			cnt = q.size() - cnt;
 
-		dq.pop_front();
+		q.pop();
 		Count += cnt;
 	}
 
