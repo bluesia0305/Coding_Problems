@@ -68,11 +68,8 @@ int main()
 			cin >> S[i][j];
 		}
 
-	for (int i = 0; i < N / 2 + 1; i++)
-	{
-		vector<int> Team;
-		Select(Team, i);
-	}
+	vector<int> Team;
+	Select(Team, 0);
 
 	cout << Min << "\n";
 	return 0;
