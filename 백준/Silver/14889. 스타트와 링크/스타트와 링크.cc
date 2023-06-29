@@ -19,7 +19,7 @@ int TeamScore(vector<int>& team)
 
 void Select(vector<int>& team, int n)
 {
-	if (n < N)
+	if (n < N || !Min)
 	{
 		team.push_back(n);
 
@@ -39,11 +39,9 @@ void Select(vector<int>& team, int n)
 				team2.push_back(i);
 			}
 			
-			int score1 = TeamScore(team);
-			int score2 = TeamScore(team2);
-
-			if (Min > abs(score1 - score2))
-				Min = abs(score1 - score2);
+			int diff = abs(TeamScore(team) - TeamScore(team2));
+			if (Min > diff)
+				Min = diff;
 
 			return;
 		}
