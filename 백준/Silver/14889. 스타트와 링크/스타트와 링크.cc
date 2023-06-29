@@ -35,10 +35,10 @@ void Select(vector<int>& team, int n)
 						idx++;
 					continue;
 				}
-			
+
 				team2.push_back(i);
 			}
-			
+
 			int diff = abs(TeamScore(team) - TeamScore(team2));
 			if (Min > diff)
 				Min = diff;
@@ -51,7 +51,7 @@ void Select(vector<int>& team, int n)
 			Select(team, i);
 			team.pop_back();
 		}
-	}	
+	}
 }
 
 int main()
@@ -64,9 +64,7 @@ int main()
 
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-		{
 			cin >> S[i][j];
-		}
 
 	vector<int> Team;
 	Select(Team, 0);
