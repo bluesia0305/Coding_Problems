@@ -12,7 +12,7 @@ void Rotate(int gear, int dir)
 		Gears[gear] = (Gears[gear] << 1) + (Gears[gear] & 0x80 ? 0x01 : 0);
 }
 
-void RotateCenter(int gear, int dir)
+void RotateFrom(int gear, int dir)
 {
 	bool connected[3];
 	for (int i = 0; i < 3; i++)
@@ -48,7 +48,7 @@ int main()
 	{
 		int gear, dir;
 		cin >> gear >> dir;
-		RotateCenter(gear - 1, dir);
+		RotateFrom(gear - 1, dir);
 	}
 
 	int score = 0;
