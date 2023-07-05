@@ -3,7 +3,7 @@
 using namespace std;
 
 int N;
-int Paper[2187][2187];
+char Paper[2187][2187];
 int Nums[3];
 
 bool IsHomogeneous(int x, int y, int len)
@@ -19,14 +19,7 @@ bool IsHomogeneous(int x, int y, int len)
 void Partition(int x, int y, int len)
 {
 	if (IsHomogeneous(x, y, len))
-	{
-		if (Paper[y][x] == 1)
-			Nums[2]++;
-		else if (Paper[y][x] == -1)
-			Nums[0]++;
-		else
-			Nums[1]++;
-	}
+		Nums[Paper[y][x]]++;
 	else
 	{
 		len /= 3;
@@ -46,7 +39,11 @@ int main()
 
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
-			cin >> Paper[i][j];
+		{
+			int c;
+			cin >> c;
+			Paper[i][j] = c + 1;
+		}
 
 	Partition(0, 0, N);
 
