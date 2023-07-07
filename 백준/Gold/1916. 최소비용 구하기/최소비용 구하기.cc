@@ -31,12 +31,6 @@ struct cmp
 
 void Dijkstra(int start, int end)
 {
-	if (start == end)
-	{
-		cout << "0\n";
-		return;
-	}
-
 	Cities[start - 1].CostSum = 0;
 
 	priority_queue<int, vector<int>, cmp> pq;
