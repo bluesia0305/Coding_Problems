@@ -25,18 +25,18 @@ int main()
 		Freq[Nums[i] + RANGE]++;
 	}
 
-	sort(&Nums[0], &Nums[N - 1] + 1);
+	sort(Nums, Nums + N);
 
 	int idx = -1;
 	int maxFreq = 0;
-	for (int i = 0; i < 8001; i++)
+	for (int i = 0; i < 2 * RANGE + 1; i++)
 		if (maxFreq < Freq[i])
 		{
 			maxFreq = Freq[i];
 			idx = i;
 		}
 
-	for (int i = idx + 1; i < 8001; i++)
+	for (int i = idx + 1; i < 2 * RANGE + 1; i++)
 		if (Freq[i] == maxFreq)
 		{
 			idx = i;
@@ -47,6 +47,6 @@ int main()
 	cout
 		<< (Avg ? Avg : 0) << "\n"
 		<< Nums[(N - 1) / 2] << "\n"
-		<< idx - 4000 << "\n"
+		<< idx - RANGE << "\n"
 		<< Nums[N - 1] - Nums[0] << "\n";
 }
