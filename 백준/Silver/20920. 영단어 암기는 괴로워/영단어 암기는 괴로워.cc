@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <unordered_map>
 #include <algorithm>
 
@@ -18,10 +19,10 @@ int main()
 
 	while (N--)
 	{
-		string str;
+		char str[11];
 		cin >> str;
 
-		if (str.size() < M)
+		if (strlen(str) < M)
 			continue;
 
 		Words[str]++;
