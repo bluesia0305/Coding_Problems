@@ -16,7 +16,7 @@ int main()
 	int N, M = 0;
 	cin >> N >> M;
 
-	while(N--)
+	while (N--)
 	{
 		string str;
 		cin >> str;
@@ -27,26 +27,22 @@ int main()
 		Words[str]++;
 	}
 
-	vector<string> Sorted;
-
-	for (auto iter = Words.begin(); iter != Words.end(); iter++)
-		Sorted.push_back(iter->first);
-
+	vector<pair<string, int>> Sorted(Words.begin(), Words.end());
 	sort(Sorted.begin(), Sorted.end(),
-		 [](const string& str1, const string& str2)
+		 [&](const pair<string, int>& pair1, const pair<string, int>& pair2)
 		 {
-			 if (Words[str1] == Words[str2])
+			 if (pair1.second == pair2.second)
 			 {
-				 if (str1.size() == str2.size())
-					 return str1 < str2;
+				 if (pair1.first.size() == pair2.first.size())
+					 return pair1.first < pair2.first;
 
-				 return str1.size() > str2.size();
+				 return pair1.first.size() > pair2.first.size();
 			 }
-			 return Words[str1] > Words[str2];
+			 return pair1.second > pair2.second;
 		 });
 
-	for (string str : Sorted)
-		cout << str << "\n";
+	for (const pair<string, int>& pair : Sorted)
+		cout << pair.first << "\n";
 
 	return 0;
 }
