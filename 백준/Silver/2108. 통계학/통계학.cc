@@ -45,8 +45,10 @@ int main()
 
 	int Avg = round((float)Sum / N);
 	cout
-		<< (Avg ? Avg : 0) << "\n"
+		<< Avg << "\n"
 		<< Nums[(N - 1) / 2] << "\n"
 		<< idx - RANGE << "\n"
 		<< Nums[N - 1] - Nums[0] << "\n";
+
+	return 0;
 }
