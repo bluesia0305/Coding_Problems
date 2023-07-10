@@ -2,12 +2,6 @@
 
 using namespace std;
 
-struct Coord
-{
-	int X;
-	int Y;
-};
-
 int N, M;
 int Paper[500][500];
 bool Visited[500][500];
@@ -43,7 +37,7 @@ void FindByDFS(int x, int y)
 	Count--;
 }
 
-void FindByManual(int x, int y)
+void FindManually(int x, int y)
 {
 	if (x < M - 2)
 	{
@@ -76,7 +70,7 @@ int main()
 		for (int x = 0; x < M; x++)
 		{
 			FindByDFS(x, y);
-			FindByManual(x, y);
+			FindManually(x, y);
 		}
 
 	cout << Max << "\n";
