@@ -5,9 +5,7 @@ using namespace std;
 int N, M;
 int Paper[500][500];
 bool Visited[500][500];
-int Max;
-int Sum;
-int Count;
+int Max, Sum, Count;
 
 void FindByDFS(int x, int y)
 {
