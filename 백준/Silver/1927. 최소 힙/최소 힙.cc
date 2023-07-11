@@ -5,21 +5,14 @@ using namespace std;
 class MinHeap
 {
 public:
-	void Swap(int idx1, int idx2)
-	{
-		int temp = Data[idx1];
-		Data[idx1] = Data[idx2];
-		Data[idx2] = temp;
-	}
-
-	void Add(int n)
+	void Insert(int n)
 	{
 		int current = Count;
 		Data[Count++] = n;
 
 		while (current > 0)
 		{
-			int parent = current % 2 ? (current - 1) / 2 : current / 2 - 1;
+			int parent = (current - 2 + current % 2) / 2;
 			if (Data[parent] <= n)
 				break;
 
@@ -28,48 +21,54 @@ public:
 		}
 	}
 
-	void Extract()
+	int Extract()
 	{
 		if (!Count)
-		{
-			cout << "0\n";
-			return;
-		}
+			return 0;
 
-		cout << Data[0] << "\n";
+		int retVal = Data[0];
 		Count--;
-
 		Swap(0, Count);
-		int current = 0;
 
+		int current = 0;
 		while (current < Count)
 		{
 			int leftChild = 2 * current + 1;
 			if (leftChild >= Count)
-				return;
+				break;
 
 			if (leftChild < Count)
 			{
 				int minChild = leftChild;
 				if (leftChild + 1 < Count)
-					minChild = Data[leftChild] < Data[leftChild + 1] ? leftChild : leftChild + 1;
+					if (Data[leftChild] > Data[leftChild + 1])
+						minChild++;
 
 				if (Data[current] <= Data[minChild])
-					return;
+					break;
 				
 				Swap(minChild, current);
 				current = minChild;
 			}
 		}
+
+		return retVal;
 	}
 
 private:
-	int Data[100000];
-	int Count;
+	void Swap(int idx1, int idx2)
+	{
+		int temp = Data[idx1];
+		Data[idx1] = Data[idx2];
+		Data[idx2] = temp;
+	}
+
+private:
+	int Data[100000] = { 0, };
+	int Count = 0;
 };
 
 int N;
-MinHeap Heap;
 
 int main()
 {
@@ -78,15 +77,16 @@ int main()
 	cout.tie(nullptr);
 
 	cin >> N;
+	MinHeap heap;
 	while (N--)
 	{
 		int num;
 		cin >> num;
 
 		if (num)
-			Heap.Add(num);
+			heap.Insert(num);
 		else
-			Heap.Extract();
+			cout << heap.Extract() << "\n";
 	}
 
 	return 0;
