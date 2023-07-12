@@ -37,14 +37,8 @@ int main()
 	sort(Houses, Houses + N);
 
 	int Min = 1;
-	int Max = Houses[N - 1] - Houses[0];
+	int Max = Houses[N - 1] - Houses[0] + 1;
 
-	if (C == 2)
-	{
-		cout << Max << "\n";
-		return 0;
-	}
-	
 	while (Min < Max)
 	{
 		int middle = (Min + Max) / 2;
