@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 
 using namespace std;
 int Freqs[26][200001];
@@ -10,12 +10,12 @@ int main()
 	cin.tie(nullptr);
 	cout.tie(nullptr);
 
-	string Str;
+	char Str[200001];
 	int Q;
 	cin >> Str >> Q;
 
 	int DP[26] = { 0, };
-	for (int i = 0; i < Str.size(); i++)
+	for (int i = 0; i < strlen(Str); i++)
 	{
 		DP[Str[i] - 'a']++;
 		for (int j = 0; j < 26; j++)
