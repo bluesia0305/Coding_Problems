@@ -17,14 +17,6 @@ struct Coord
 
 priority_queue<Coord, vector<Coord>, greater<>> PQ;
 
-void Initiate()
-{
-	for (int i = 0; i < N; i++)
-		for (int j = 0; j < N; j++)
-			if (TestTube[i][j])
-				PQ.emplace(Coord{ i, j });
-}
-
 void Contaminate(priority_queue<Coord, vector<Coord>, greater<>>& pq, int row, int col, int dRow, int dCol)
 {
 	int x = row + dRow, y = col + dCol;
@@ -65,18 +57,20 @@ void Propagate()
 
 int main()
 {
-    ios::sync_with_stdio(false);
+	ios::sync_with_stdio(false);
 	cin.tie(nullptr);
 	cout.tie(nullptr);
-    
+
 	cin >> N >> K;
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
+		{
 			cin >> TestTube[i][j];
+			if (TestTube[i][j])
+				PQ.emplace(Coord{ i, j });
+		}
 
 	cin >> S >> X >> Y;
-
-	Initiate();
 
 	for (int i = 0; i < S; i++)
 		Propagate();
