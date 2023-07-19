@@ -57,11 +57,18 @@ void Propagate()
 		}
 	}
 
+	if (pq.empty())
+		return;
+
 	PQ.swap(pq);
 }
 
 int main()
 {
+    ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
+    
 	cin >> N >> K;
 	for (int i = 0; i < N; i++)
 		for (int j = 0; j < N; j++)
