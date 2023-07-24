@@ -1,17 +1,13 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int DP[10001];
-
 int main()
 {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
-	cout.tie(nullptr);
-
 	int N, K;
 	cin >> N >> K;
+	vector<int> DP(K + 1);
 
 	DP[0] = 1;
 	while (N--)
