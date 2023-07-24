@@ -3,7 +3,6 @@
 using namespace std;
 
 int DP[10001];
-int Coins[100];
 
 int main()
 {
@@ -14,13 +13,15 @@ int main()
 	int N, K;
 	cin >> N >> K;
 
-	for (int i = 0; i < N; i++)
-		cin >> Coins[i];
-
 	DP[0] = 1;
-	for (int i = 0; i < N; i++)
-		for (int j = Coins[i]; j <= K; j++)
-			DP[j] += DP[j - Coins[i]];
+	while (N--)
+	{
+		int Coin;
+		cin >> Coin;
+
+		for (int j = Coin; j <= K; j++)
+			DP[j] += DP[j - Coin];
+	}
 
 	cout << DP[K] << "\n";
 	return 0;
