@@ -12,72 +12,58 @@ struct Coord
 	int Y;
 };
 
+int N, L, R, Sum, Days;
 int A[50][50];
 bool Visited[50][50];
-bool Unified[50][50];
-int N, L, R, Count;
 
-void Propagate(queue<Coord>& q, int x, int y, int dx, int dy)
+int DX[4] = { 1, 0, -1, 0 };
+int DY[4] = { 0, 1, 0, -1 };
+
+queue<Coord> q;
+vector<Coord> Union;
+
+void FindUnion(int x, int y, int i)
 {
-	if (x + dx < 0 || x + dx > N - 1 ||
-		y + dy < 0 || y + dy > N - 1)
+	int row = y + DY[i];
+	int col = x + DX[i];
+
+	if (row < 0 || row > N - 1 ||
+		col < 0 || col > N - 1 ||
+		Visited[row][col])
 		return;
 
-	int diff = abs(A[y][x] - A[y + dy][x + dx]);
-	if (!Visited[y + dy][x + dx] &&	diff >= L && diff <= R)
-		q.emplace(Coord{ x + dx, y + dy });
+	int diff = abs(A[y][x] - A[row][col]);
+	if (diff >= L && diff <= R)
+	{
+		Visited[row][col] = true;
+		Sum += A[row][col];
+		Union.emplace_back(Coord{ col, row });
+		q.emplace(Coord{ col, row });
+	}
 }
 
 bool Unify(int x, int y)
 {
-	memset(Visited, false, 50 * 50);
-	int sum = 0;
-	int count = 0;
+	Visited[y][x] = true;
+	Sum = A[y][x];
 
-	queue<Coord> q;
+	Union.clear();
+	Union.emplace_back(Coord{ x, y });
 	q.emplace(Coord{ x, y });
-
-	vector<Coord> Union;
 	while (!q.empty())
 	{
 		Coord coord = q.front();
 		q.pop();
 
-		if (Unified[coord.Y][coord.X] || Visited[coord.Y][coord.X])
-			continue;
-
-		Visited[coord.Y][coord.X] = true;
-		Union.emplace_back(Coord{ coord.X, coord.Y });
-		sum += A[coord.Y][coord.X];
-		count++;
-
-		Propagate(q, coord.X, coord.Y,  1,  0);
-		Propagate(q, coord.X, coord.Y,  0,  1);
-		Propagate(q, coord.X, coord.Y, -1,  0);
-		Propagate(q, coord.X, coord.Y,  0, -1);
+		for (int i = 0; i < 4; i++)
+			FindUnion(coord.X, coord.Y, i);
 	}
-	
-	int Num = sum / count;
+
+	int Num = Sum / Union.size();
 	for (const Coord& c : Union)
-	{
 		A[c.Y][c.X] = Num;
-		Unified[c.Y][c.X] = true;
-	}
 
 	return Union.size() > 1;
-}
-
-bool IsUnifyable()
-{
-	memset(Unified, false, 50 * 50);
-	bool bUnifyable = false;
-
-	for (int i = 0; i < N; i++)
-		for (int j = 0; j < N; j++)
-			if (!Unified[i][j])
-				bUnifyable |= Unify(j, i);
-
-	return bUnifyable;
 }
 
 int main()
@@ -88,9 +74,23 @@ int main()
 		for (int j = 0; j < N; j++)
 			cin >> A[i][j];
 
-	while (IsUnifyable())
-		Count++;
+	while (true)
+	{
+		bool bExistUnion = false;
+		for (int i = 0; i < N; i++)
+			for (int j = 0; j < N; j++)
+				if (!Visited[i][j])
+					bExistUnion |= Unify(j, i);
 
-	cout << Count << "\n";
+		if (bExistUnion)
+		{
+			Days++;
+			memset(Visited, false, 50 * 50);
+		}
+		else
+			break;
+	}
+
+	cout << Days << "\n";
 	return 0;
 }
