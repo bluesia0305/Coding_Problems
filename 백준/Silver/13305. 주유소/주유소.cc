@@ -5,7 +5,7 @@ using namespace std;
 int N;
 int Cities[100000];
 int Edges[99999];
-unsigned long long Cost;
+size_t Cost;
 
 int main()
 {
@@ -19,8 +19,8 @@ int main()
 	int i = 0;
 	while (i < N - 1)
 	{
-		int oilCost = Cities[i];
-		int distSum = 0;
+		size_t oilCost = Cities[i];
+		size_t distSum = 0;
 
 		while (oilCost <= Cities[i])
 		{
