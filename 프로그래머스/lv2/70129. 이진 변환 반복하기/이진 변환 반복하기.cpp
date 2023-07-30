@@ -11,23 +11,23 @@ vector<int> solution(string s)
 		if (s == "1")
 			break;
 
-		string str;
+		string temp;
 		for (char c : s)
 			if (c == '1')
-				str += "1";
+				temp += "1";
 			else
 				answer[1]++;
 
-		int n = str.size();
+		int n = temp.size();
 		int z = 0x01;
-		string binary;
+		temp = "";
 		while (n >= z)
 		{
-			binary = (n & z ? "1" : "0") + binary;
+			temp = (n & z ? "1" : "0") + temp;
 			z <<= 1;
 		}
 		
-		s = binary;
+		s = temp;
 		answer[0]++;
 	}
 
