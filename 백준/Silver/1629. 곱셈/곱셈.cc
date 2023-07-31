@@ -7,9 +7,7 @@ size_t ModularPow(int a, int b, int mod)
 	if (b == 1)
 		return a;
 
-	int e = b / 2;
-	size_t n = ModularPow(a, e, mod);
-
+	size_t n = ModularPow(a, b / 2, mod);
 	return (b % 2 ? n * n % mod * a : n * n) % mod;
 }
 
