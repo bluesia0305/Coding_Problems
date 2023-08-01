@@ -12,13 +12,6 @@ struct Item
 Item Items[100];
 int DP[100001];
 
-void Print(int K)
-{
-	for (int i = 0; i <= K; i++)
-		cout << DP[i] << " ";
-	cout << "\n";
-}
-
 int main()
 {
 	int N, K;
@@ -26,7 +19,6 @@ int main()
 
 	for (int i = 0; i < N; i++)
 		cin >> Items[i].W >> Items[i].V;
-
 
 	for (int i = 0; i < N; i++)
 		for (int k = K; k >= Items[i].W; k--)
