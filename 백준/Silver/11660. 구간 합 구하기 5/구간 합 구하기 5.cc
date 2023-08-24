@@ -23,8 +23,8 @@ int main()
 	while (M--)
 	{
 		int x1, y1, x2, y2;
-		cin >> y1 >> x1 >> y2 >> x2;
-		cout << DP[y2][x2] - DP[y1 - 1][x2] - DP[y2][x1 - 1] + DP[y1 - 1][x1 - 1] << "\n";
+		cin >> x1 >> y1 >> x2 >> y2;
+		cout << DP[x2][y2] - DP[x1 - 1][y2] - DP[x2][y1 - 1] + DP[x1 - 1][y1 - 1] << "\n";
 	}
 
 	return 0;
