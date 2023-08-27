@@ -1,5 +1,4 @@
 #include <string>
-#include <iostream>
 
 using namespace std;
 
@@ -15,7 +14,6 @@ bool solution(string s)
         if (flag < 0)
             return false;
     }
-         
 
     return flag == 0;
 }
