@@ -4,9 +4,6 @@ using namespace std;
 
 bool solution(string s)
 {
-    if (s[0] == ')')
-        return false;
-    
     int flag = 0;
     for (char c : s)
     {
