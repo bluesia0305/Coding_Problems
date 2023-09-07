@@ -28,7 +28,7 @@ int main()
 		else
 			memoize = 0;
 	}
-	
+
 	cout << max << "\n";
 
 	return 0;
