@@ -1,24 +1,44 @@
 #include <string>
+#include <stack>
 
 using namespace std;
 
-bool decision(string s)
+stack<char> Stack;
+
+bool decision2(string s)
 {
-	int len = (int)s.size() + 1;
-	while (len != (int)s.size())
+	for (char c : s)
 	{
-		len = s.size();
-		if (s.find("()") < s.size())
-			s.replace(s.find("()"), 2, "");
-
-		if (s.find("{}") < s.size())
-			s.replace(s.find("{}"), 2, "");
-
-		if (s.find("[]") < s.size())
-			s.replace(s.find("[]"), 2, "");
+		switch (c)
+		{
+			case '(': case '{': case '[':
+			{
+				Stack.push(c);
+				break;
+			}
+			
+			case ')':
+			{
+				if (Stack.empty() || Stack.top() != '(') return false;
+				Stack.pop();
+				break;
+			}
+			case '}':
+			{
+				if (Stack.empty() || Stack.top() != '{') return false;
+				Stack.pop();
+				break;
+			}
+			case ']':
+			{
+				if (Stack.empty() || Stack.top() != '[') return false;
+				Stack.pop();
+				break;
+			}
+		}
 	}
 
-	return s.empty();
+	return Stack.empty();
 }
 
 int solution(string s)
@@ -28,7 +48,7 @@ int solution(string s)
 
 	s += s;
 	for (int i = 0; i < n; i++)
-		if (decision(s.substr(i, n)))
+		if (decision2(s.substr(i, n)))
 			answer++;
 
 	return answer;
