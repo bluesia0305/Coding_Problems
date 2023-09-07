@@ -11,8 +11,6 @@ long long pulsify(vector<int> sequence, int sgn)
 	while (idx < (int)sequence.size())
 	{
 		int num = sgn * sequence[idx];
-		if (maxSum < num)
-			maxSum = num;
 
 		if (sum + num > 0)
 		{
