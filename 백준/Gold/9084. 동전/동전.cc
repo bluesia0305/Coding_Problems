@@ -18,13 +18,9 @@ int main()
 
 		cin >> M;
 		for (int coin : Coins)
-		{
 			for (int i = 0; i <= M; i++)
-			{
 				if (i - coin >= 0)
 					Price[i] += Price[i - coin];
-			}
-		}
 
 		cout << Price[M] << "\n";
 	}
