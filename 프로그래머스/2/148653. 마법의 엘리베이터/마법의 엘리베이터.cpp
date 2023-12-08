@@ -1,34 +1,25 @@
-#include <string>
-#include <vector>
-
-using namespace std;
-
 int solution(int storey)
 {
 	int answer = 0;
-	string s = to_string(storey);
-
-	vector<int> digits(9);
-	for (int i = 0; i < s.size(); i++)
-		digits[i] = s[s.size() - 1 - i] - '0';
-
-	for (int i = 0; i < 8; i++)
+	while (storey > 0)
 	{
-		if (digits[i] < 5)
-			answer += digits[i];
-		else if (digits[i] > 5)
+		int digit = storey % 10;
+		storey /= 10;
+
+		if (digit < 5)
+			answer += digit;
+		else if (digit > 5)
 		{
-			answer += 10 - digits[i];
-			digits[i + 1]++;
+			answer += 10 - digit;
+			storey++;
 		}
 		else
 		{
 			answer += 5;
-			if (digits[i + 1] >= 5)
-				digits[i + 1]++;
+			if (storey % 10 >= 5)
+				storey++;
 		}
 	}
-
-	answer += digits[8];
+	
 	return answer;
 }
