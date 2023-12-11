@@ -39,9 +39,6 @@ bool IsFillable(Coord coord, int n)
 
 void FillBlanks()
 {
-	if (Filled == Blanks.size())
-		return;
-
 	Coord blank = Blanks[Filled];
 	for (int i = 1; i <= 9; i++)
 	{
@@ -50,7 +47,8 @@ void FillBlanks()
 		{
 			Sudoku[blank.Row][blank.Col] = i;
 			Filled++;
-			FillBlanks();	// recursion
+			if (Filled < Blanks.size())
+				FillBlanks();	// recursion
 		}
 	}
 
@@ -72,7 +70,8 @@ int main()
 				Blanks.push_back(Coord{ i, j });
 		}
 
-	FillBlanks();
+	if (!Blanks.empty())
+		FillBlanks();
 
 	// print
 	for (int i = 0; i < 9; i++)
