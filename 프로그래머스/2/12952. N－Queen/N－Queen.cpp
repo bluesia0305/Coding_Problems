@@ -1,25 +1,12 @@
-#include <iostream>
-
-using namespace std;
-
 int ChessBoard[12][12];
 int Queens;
 int Count;
 
-void Print(int n)
+void AddQueen(int n, int col, int inc)
 {
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-            cout << ChessBoard[i][j] << " ";
-        cout << "\n";
-    }
-    cout << "-------------------------\n";
-}
-
-void Queen(int n, int col, int inc)
-{
-    ChessBoard[Queens][col] += inc;
+    // 퀸을 배치하는 곳 = ChessBoard[Queens][col]
+    
+    // 아래 방향 이동 경로 표시 (아래 방향 직선 및 왼쪽/오른쪽 대각선)
     if (Queens < n - 1)
     {
         int side = 1;
@@ -35,28 +22,27 @@ void Queen(int n, int col, int inc)
     }
 }
 
-void PutQueen(int n)
+void PlayChess(int n)
 {
-    if (Queens < n)
+    if (Queens == n)
     {
-        for (int i = 0; i < n; i++)
-        {
-            if (ChessBoard[Queens][i] == 0)
-            {
-                Queen(n, i, 1);
-                Queens++;
-                PutQueen(n);
-                Queens--;
-                Queen(n, i, -1);
-            }
-        }
-    }
-    else
         Count++;
+        return;
+    }
+
+    for (int i = 0; i < n; i++)
+        if (ChessBoard[Queens][i] == 0)
+        {
+            AddQueen(n, i, 1);
+            Queens++;
+            PlayChess(n);
+            Queens--;
+            AddQueen(n, i, -1);
+        }
 }
 
 int solution(int n)
 {
-    PutQueen(n);
+    PlayChess(n);
     return Count;
 }
