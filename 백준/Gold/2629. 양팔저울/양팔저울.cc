@@ -1,39 +1,39 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-int n, chu[31], m, chu_max;
-bool dy[40001];
-int main() {
-	ios::sync_with_stdio(0);
-	cin.tie(0);
-	
+bool marbles[40001];
+
+int main()
+{
+	int n;
 	cin >> n;
 
-	for (int i = 0; i < n; i++) {
-		cin >> chu[i];
-		chu_max += chu[i];
+	marbles[0] = true;
+	int sum = 0;
+	while (n--)
+	{
+		int w;
+		cin >> w;
+
+		sum += w;
+		for (int i = sum; i >= 0; i--)
+			if (marbles[i])
+				marbles[i + w] = true;
+
+		for (int i = 0; i <= sum; i++)
+			if (marbles[i])
+				marbles[w - i >= 0 ? w - i : i - w] = true;
 	}
-	
-	dy[0] = true;
-	for (int i = 0; i < n; i++) {
-		for (int j = chu_max; j >= 0; j--)
-			if (dy[j]) dy[j + chu[i]] = 1;
-		for (int j = 0; j <= chu_max; j++)
-			if (dy[j]) dy[abs(j - chu[i])] = 1;
-	}
 
-
-	//for (int j = 0; j <= chu_max; j++) {
-	//	cout << dy[j] << " ";
-	//}
-	//cout << '\n';
-
-
+	int m;
 	cin >> m;
-	for (int i = 0; i < m; i++) {
-		int tmp;
-		cin >> tmp;
-		if (dy[tmp]) cout << "Y ";
-		else cout << "N ";
+	while (m--)
+	{
+		int marble;
+		cin >> marble;
+		cout << (marbles[marble] ? "Y" : "N") << " ";
 	}
+
+	cout << "\n";
+	return 0;
 }
