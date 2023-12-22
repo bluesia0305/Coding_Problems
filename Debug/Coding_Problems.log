@@ -1,2 +1,3 @@
 ﻿  소스.cpp
+C:\Users\blues\Desktop\Coding_Problems\소스.cpp(49,25): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Coding_Problems.vcxproj -> C:\Users\blues\Desktop\Coding_Problems\Debug\Coding_Problems.exe
