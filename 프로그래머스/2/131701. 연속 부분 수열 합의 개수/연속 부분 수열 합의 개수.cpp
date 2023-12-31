@@ -1,11 +1,11 @@
 #include <vector>
-#include <unordered_set>
+#include <set>
 
 using namespace std;
 
 int solution(vector<int> elements)
 {
-    unordered_set<int> nums;
+    set<int> nums;
     for (int i = 0; i < elements.size(); i++)
     {
         int num = 0;
