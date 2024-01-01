@@ -1,51 +1,33 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include <queue>
-#include <algorithm>
-
-#include <iostream>
 
 using namespace std;
 
 int solution(vector<string> want, vector<int> number, vector<string> discount)
 {
-    int sum = 0, answer = 0;
+    int answer = 0;
     unordered_map<string, int> items;
-    for (int i = 0; i < want.size(); i++)
-    {
-        items[want[i]] = number[i];
-        sum += number[i];
-    }
+    for (int i = 0; i < 9; i++)
+        items[discount[i]]++;
 
-    queue<string> q;
-    for (string item : discount)
+    for (int i = 9; i < discount.size(); i++)
     {
-        if (find(want.begin(), want.end(), item) != want.end())
-        {
-            items[item]--;
-            sum--;
-            q.emplace(item);
-            
-            while (items[item] < 0)
-            {
-                items[q.front()]++;
-                sum++;
-                q.pop();
-            }
-        }
-        else
-        {
-            while (!q.empty())
-            {
-                items[q.front()]++;
-                sum++;
-                q.pop();
-            }
-        }
+        items[discount[i]]++;
         
-        if (sum == 0)
+        bool bSatisfied = true;
+        for (int i = 0; i < want.size(); i++)
+            if (items[want[i]] != number[i])
+            {
+                bSatisfied = false;
+                break;
+            }
+        
+        if (bSatisfied)
             answer++;
+        
+        items[discount[i - 9]]--;
     }
+    
     return answer;
 }
