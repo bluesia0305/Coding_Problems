@@ -3,8 +3,7 @@
 
 using namespace std;
 
-int pairs1[676];
-int pairs2[676];
+int pairs1[676], pairs2[676];
 
 int solution(string str1, string str2)
 {
