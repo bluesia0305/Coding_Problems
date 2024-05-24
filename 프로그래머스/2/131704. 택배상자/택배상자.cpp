@@ -7,32 +7,16 @@ using namespace std;
 int solution(vector<int> order)
 {
     int answer = 0;
-    int box = 1;
     stack<int> Sub;
-    for (int i = 0; i < order.size(); i++)
+    for (int box = 1; box <= order.size(); box++)
     {
-        while (!Sub.empty())
-        {            
-            if (Sub.top() == order[i])
-            {
-                Sub.pop();
-                answer++;
-                i++;
-            }
-            else
-                break;
-        }
+        Sub.push(box);
         
-        while (box < order.size() && box != order[i])
-            Sub.push(box++);
-
-        if (box == order[i])
-        {
-            box++;
+        while (!Sub.empty() && Sub.top() == order[answer])
+        {            
+            Sub.pop();
             answer++;
         }
-        else
-            break;
     }
     
     return answer;
