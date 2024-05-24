@@ -15,16 +15,8 @@ string solution(vector<int> numbers)
          });
     
     string answer = "";
-    bool Zero = true;
     for (int& n : numbers)
-    {
-        if (n > 0)
-            Zero = false;
         answer += to_string(n);
-    }
-    
-    if (Zero)
-        return "0";
-    else
-        return answer;
+
+        return answer[0] == '0' ? "0" : answer;
 }
