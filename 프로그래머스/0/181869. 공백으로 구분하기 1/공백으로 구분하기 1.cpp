@@ -7,10 +7,10 @@ using namespace std;
 vector<string> solution(string my_string)
 {
     vector<string> answer;
-    string str = "";
+    string sout;
     stringstream ss(my_string);
-    while (ss >> str)
-        answer.push_back(str);
+    while (ss >> sout)
+        answer.push_back(sout);
     
     return answer;
 }
