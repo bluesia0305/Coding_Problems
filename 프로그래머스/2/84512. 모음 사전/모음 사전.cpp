@@ -1,8 +1,6 @@
 #include <string>
 #include <vector>
 
-#include <iostream>
-
 using namespace std;
 
 string Word[5] = { "A", "E", "I", "O", "U" };
