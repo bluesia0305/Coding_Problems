@@ -3,10 +3,8 @@
 #include <stack>
 #include <algorithm>
 
-#include <iostream>
-
 int Map[100][100] = { 0, }; // 0 = visited, 'X' = sea
-int LX, LY;
+int LX, LY;                 // Map size
 
 using namespace std;
 
